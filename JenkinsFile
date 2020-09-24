@@ -16,6 +16,6 @@ node {
 			currentBuild.result = 'FAILURE'
 		}
 		junit 'newman.xml'
-        sh "curl -s -X POST https://api.telegram.org/bot1282407535:AAGyfDed5L_R7QLzRkXjX_yPJsGLXUaAn4E/sendMessage -d chat_id=221338397 -d text='Finish%20API%20Test.%0Ahttps://jenkins.driveroo.com/job/b2b-pipelineFromGitHub/lastBuild/consoleText'"
+        sh "curl -s -X POST https://api.telegram.org/bot1282407535:AAGyfDed5L_R7QLzRkXjX_yPJsGLXUaAn4E/sendMessage -d chat_id=221338397 -d text='Finish%20API%20Test.%0Ahttps://jenkins.driveroo.com/job/Postman_API_Pipeline/lastBuild/consoleText'"
     }
 }
