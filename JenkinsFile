@@ -5,7 +5,7 @@ node {
         TOKEN1="342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8"
     } 
 	stage('Postman test'){
-//        sh "curl -s -X POST https://api.telegram.org/bot1282407535:AAGyfDed5L_R7QLzRkXjX_yPJsGLXUaAn4E/sendMessage -d chat_id=-481038264 -d text='Start API Test.'"
+        sh "curl -s -X POST https://api.telegram.org/bot1282407535:AAGyfDed5L_R7QLzRkXjX_yPJsGLXUaAn4E/sendMessage -d chat_id=-481038264 -d text='Start API Test.'"
 
 		git 'https://github.com/Slon-ua/Driveroo_Postman_Pipeline.git'
 		sh 'npm install'
@@ -16,6 +16,6 @@ node {
 			currentBuild.result = 'FAILURE'
 		}
 		junit 'newman.xml'
-//        sh "curl -s -X POST https://api.telegram.org/bot1282407535:AAGyfDed5L_R7QLzRkXjX_yPJsGLXUaAn4E/sendMessage -d chat_id=-481038264 -d text='Finish%20API%20Test.%0Ahttps://jenkins.driveroo.com/job/Postman_API_Pipeline/lastBuild/consoleText'"
+        sh "curl -s -X POST https://api.telegram.org/bot1282407535:AAGyfDed5L_R7QLzRkXjX_yPJsGLXUaAn4E/sendMessage -d chat_id=-481038264 -d text='Finish%20API%20Test.%0Ahttps://jenkins.driveroo.com/job/Postman_API_Pipeline/lastBuild/consoleText'"
     }
 }
