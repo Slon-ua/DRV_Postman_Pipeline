@@ -16,34 +16,29 @@
 							"script": {
 								"id": "3d887ca6-750c-4e03-9ab7-60e672cf3f03",
 								"exec": [
-									"// console.log(pm.variables.get('token_id'));  // выводит данные в консоль",
 									"",
-									"var jsonData = JSON.parse(responseBody); //сохраняет JSON Response  в переменную jsonData",
-									"//postman.setGlobalVariable(\"token_id\", jsonData.token); // присваивает значение для переменной Postman - \"token_id\"",
-									"//postman.setEnvironmentVariable (\"token_id\", jsonData.token); // присваивает значение для переменной Postman",
+									"var responseJson = pm.response.json();",
 									"",
-									"// console.log(\"выведет только что присвоиное значение для переменной Postman - 'token_id'\")",
+									"pm.globals.set(\"token_id\", responseJson.token);",
+									"pm.collectionVariables.set(\"token_id\", responseJson.token);",
+									"pm.environment.set(\"token_id\", responseJson.token);",
 									"",
-									"// console.log(pm.variables.get(\"token_id\"));",
-									"// console.log(pm.environment.get(\"token_id\"));",
-									"",
-									"pm.globals.set(\"token_id\", jsonData.token);",
-									"pm.collectionVariables.set(\"token_id\", jsonData.token);",
-									"pm.environment.set(\"token_id\", jsonData.token);",
-									"",
-									"",
+									"/*",
 									"// получить глобальную переменную",
 									"console.log(pm.globals.get(\"token_id\"));",
 									"// получить переменную из окружения",
 									"console.log(pm.environment.get(\"token_id\"));",
 									"// получить переменную из любого пространства согласно приоритету",
 									"console.log(pm.variables.get(\"token_id\"));",
+									"*/",
 									"",
-									"var responseJson = pm.response.json();",
 									"",
 									"pm.test(\"Response time is less than 2400ms\", function () {",
 									"    console.log(\"Response time is \"+pm.response.responseTime);",
 									"    pm.expect(pm.response.responseTime).to.be.below(2400);",
+									"});",
+									"",
+									"pm.test(\"Create new user\", function () {",
 									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
@@ -52,7 +47,7 @@
 									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
-									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
 									"});",
 									"",
 									"pm.test(\"The response has all properties\", () => {",
@@ -63,56 +58,19 @@
 									"    pm.expect(responseJson.type).to.eql('fleet');",
 									"    pm.expect(responseJson.email).to.eql(\"sergeyk+000@driveroo.com\"); ",
 									"    pm.expect(responseJson.name).to.eql('Chuck Norris');",
-									"    pm.expect(jsonData.email).not.eq(undefined); //To Check if Value is Null",
+									"    pm.expect(responseJson.email).not.eq(undefined); //To Check if Value is Null",
 									"});",
 									"",
 									"pm.test(\"To check if Value eql in the response \", () => {",
 									"    pm.expect(responseJson.type).to.eql('fleet');",
 									"    pm.expect(responseJson.email).to.eql(\"sergeyk+000@driveroo.com\"); ",
 									"    pm.expect(responseJson.name).to.eql('Chuck Norris');",
-									"    pm.expect(jsonData.email).not.eq(undefined); //To Check if Value is Null",
+									"    pm.expect(responseJson.email).not.eq(undefined); //To Check if Value is Null",
 									"});",
 									"pm.test(\"Check the type of properties\", () => {",
 									"    pm.expect(responseJson.name).to.be.a('string');",
 									"});",
-									"",
-									"",
-									"/*",
-									"pm.test(\"The response has all properties\", () => {",
-									"    pm.response.to.be.json;",
-									"    pm.expect(jsonData).to.be.an(\"object\");",
-									"   // pm.expect(pm.response.json()).to.have.all.keys('name','email');",
-									"    pm.expect(pm.response.json()).to.have.any.keys('name');",
-									"    pm.expect(pm.response.json()).to.have.property('name');",
-									"",
-									"    console.log(\"@@@@@@@@@@ \"+pm.response.to.be.json);",
-									"   // parse the response json and test three properties",
-									"    var responseJson = pm.response.json();",
-									"    pm.expect(responseJson.type).to.eql('fleet');",
-									"    pm.expect(responseJson.name).to.be.a('string');",
-									"",
-									"     console.log(responseJson.name);",
-									"     console.log(responseJson);",
-									"     console.log(responseJson.email);",
-									"     console.log(responseJson.name);",
-									"",
-									"    pm.expect(responseJson.email).to.have.lengthOf(23);",
-									"    pm.expect(responseJson.email).to.eql(\"linden.eskimo@gmail.com\");",
-									"});",
-									"",
-									"pm.test(\"The response has all properties #2\", function()  {",
-									"   // parse the response json and test three properties",
-									"    var responseJson1 =JSON.parse(responseBody);",
-									"    console.log(\"###-- \"+pm.environment.get(\"name\"));",
-									"  //  pm.expect(responseJson1.name).to.eql('Nadezhda Moha');",
-									"   pm.expect(responseJson1.email).to.eql(\"linden.eskimo@gmail.com\");",
-									"});  ",
-									"",
-									"pm.test(\"To Check if Value is Null\", function() {",
-									"var jsonData = pm.response.json();",
-									"pm.expect(jsonData.email).not.eq(undefined);",
-									"});",
-									"*/"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -185,68 +143,6 @@
 					"response": []
 				},
 				{
-					"name": "/fleets/company/profile",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "be83cc73-86f8-4ed4-bb98-0ad67589aec6",
-								"exec": [
-									"var responseJson = pm.response.json();",
-									"",
-									"pm.test(\"The response is JSON and type 'object'\", () => {",
-									"    pm.response.to.be.json;",
-									"    pm.expect(responseJson).to.be.an(\"object\");",
-									"});",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"The response has all properties\", () => {",
-									"    pm.expect(responseJson.data).to.have.any.keys('name');",
-									"    pm.expect(responseJson.data).to.have.property('id');",
-									"    pm.expect(responseJson.data.name).to.be.a('string');",
-									"    pm.expect(responseJson.data.name).to.eql('Driveroo_Test_Env');",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_id}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sandbox.driveroo.com/userApi/fleets/company/profile",
-							"protocol": "https",
-							"host": [
-								"sandbox",
-								"driveroo",
-								"com"
-							],
-							"path": [
-								"userApi",
-								"fleets",
-								"company",
-								"profile"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "/fleets/groups",
 					"event": [
 						{
@@ -254,26 +150,30 @@
 							"script": {
 								"id": "91fc5aef-02bd-4b88-ba2b-5999465e77ab",
 								"exec": [
-									"var responseJson = pm.response.json();",
+									"// var responseJson = pm.response.json();",
 									"",
-									"pm.globals.set(\"group_id\", responseJson.data.id);",
-									"pm.collectionVariables.set(\"group_id\", responseJson.data.id);",
-									"pm.environment.set(\"group_id\", responseJson.data.id);",
+									"// pm.globals.set(\"group_id\", responseJson.data.id);",
+									"// pm.collectionVariables.set(\"group_id\", responseJson.data.id);",
+									"// pm.environment.set(\"group_id\", responseJson.data.id);",
 									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
 									"",
-									"pm.test(\"The response is JSON and type 'object'\", () => {",
-									"    pm.response.to.be.json;",
-									"    pm.expect(responseJson).to.be.an(\"object\");",
-									"});",
+									"// pm.test(\"Resive ompany profile inform\", function () {",
+									"// });",
 									"",
-									"pm.test(\"The response has all properties\", () => {",
-									"    pm.expect(responseJson.data[0]).to.have.any.keys('name');",
-									"    pm.expect(responseJson.data[0]).to.have.property('id');",
-									"    pm.expect(responseJson.data[0].name).to.be.a('string');",
-									"});",
+									"// pm.test(\"Status code is 200\", function () {",
+									"//     pm.response.to.have.status(200);",
+									"// });",
+									"",
+									"// pm.test(\"The response is JSON and type 'object'\", () => {",
+									"//     pm.response.to.be.json;",
+									"//     pm.expect(responseJson).to.be.an(\"object\");",
+									"// });",
+									"",
+									"// pm.test(\"The response has all properties\", () => {",
+									"//     pm.expect(responseJson.data[0]).to.have.any.keys('name');",
+									"//     pm.expect(responseJson.data[0]).to.have.property('id');",
+									"//     pm.expect(responseJson.data[0].name).to.be.a('string');",
+									"// });",
 									""
 								],
 								"type": "text/javascript"
@@ -319,6 +219,9 @@
 								"id": "c7397540-d6f4-48c6-9936-9ba71c5adc81",
 								"exec": [
 									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Recive service list\", function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -403,6 +306,9 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
+									"pm.test(\"Recive service list\", function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -471,9 +377,74 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "be83cc73-86f8-4ed4-bb98-0ad67589aec6",
+								"exec": [
+									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Resive ompany profile inform\", function () {",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.data).to.have.any.keys('name');",
+									"    pm.expect(responseJson.data).to.have.property('id');",
+									"    pm.expect(responseJson.data.name).to.be.a('string');",
+									"    pm.expect(responseJson.data.name).to.eql('Driveroo_Test_Env');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/company/profile",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"company",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fleets/company/profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
 								"id": "61c4eea6-1e50-4a9f-8741-be73e38eb82b",
 								"exec": [
 									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\" \", function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -533,6 +504,9 @@
 								"id": "0e0d479d-28ee-4c84-9a9c-7ba1b80a8b9b",
 								"exec": [
 									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Inform about fleet owner\", function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -649,6 +623,9 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
+									"pm.test(\"List of reports\", function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -722,6 +699,9 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
+									"pm.test(\"list of maintenance schedulers\", function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -739,7 +719,7 @@
 									"    // pm.expect(responseJson.data[0].service_name).to.be.a('string');",
 									"    pm.expect(responseJson.meta.pagination.total).to.be.a('number');",
 									"    pm.expect(responseJson.meta.pagination.current_page).to.be.a('number');",
-									"    pm.expect(responseJson.meta.pagination.links).to.be.an('array');",
+									"    pm.expect(responseJson.success).to.equal(true);",
 									"",
 									"});",
 									""
@@ -800,6 +780,9 @@
 								"id": "8e977d31-5f3e-4aa6-b25c-31ff0156faa0",
 								"exec": [
 									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Create flet user\", function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -890,7 +873,9 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
-									"console.log(responseJson.data.id);",
+									"",
+									"pm.test(\"Receive all users info\", function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -951,7 +936,8 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
-									"console.log(responseJson.data.id);",
+									"pm.test(\"Receive user info recently created with next id - \"+pm.collectionVariables.get(\"user_id\"), function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -1011,7 +997,8 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
-									"console.log(responseJson.data.id);",
+									"pm.test(\"Receive list of car for user with id - \"+pm.collectionVariables.get(\"user_id\"), function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -1071,7 +1058,8 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
-									"console.log(responseJson.data.id);",
+									"pm.test(\"Update user with next id - \"+pm.collectionVariables.get(\"user_id\"), function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -1131,6 +1119,9 @@
 								"id": "c1b53fc2-2f61-4c3e-94b7-473c08e678fb",
 								"exec": [
 									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Reset Password for user with next id - \"+pm.collectionVariables.get(\"user_id\"), function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -1233,6 +1224,9 @@
 							"script": {
 								"id": "db050ff0-3f15-4084-8245-bd6c5e4a66d5",
 								"exec": [
+									"pm.test(\"Dellet user with next id - \"+pm.collectionVariables.get(\"user_id\"), function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 204\", function () {",
 									"    pm.response.to.have.status(204);",
 									"});",
@@ -1371,6 +1365,10 @@
 									"// получить переменную из любого пространства согласно приоритету",
 									"console.log(\"3 \"+pm.variables.get(\"role_id\"));",
 									"",
+									"",
+									"pm.test(\"Create flet roles\", function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -1429,6 +1427,10 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
+									"",
+									"pm.test(\"Receive all flet roles\", function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -1486,6 +1488,10 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
+									"",
+									"pm.test(\"Receive info of flet roles with id - \"+pm.collectionVariables.get(\"role_id\"), function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -1534,6 +1540,9 @@
 								"id": "bca6795b-529b-4729-a41d-f997fbf3a88e",
 								"exec": [
 									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Update flet roles with id - \"+pm.collectionVariables.get(\"role_id\"), function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -1598,6 +1607,8 @@
 							"script": {
 								"id": "681a17e9-cd21-4430-a3ec-f74b8104734f",
 								"exec": [
+									"pm.test(\"Dellet role with next id - \"+pm.collectionVariables.get(\"user_id\"), function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 204\", function () {",
 									"    pm.response.to.have.status(204);",
@@ -1647,6 +1658,9 @@
 									"// получить переменную из любого пространства согласно приоритету",
 									"console.log(\"3 \"+pm.variables.get(\"group_id\"));",
 									"",
+									"",
+									"pm.test(\"Create flet groups\", function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -1715,6 +1729,9 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
+									"pm.test(\"Receive list of all flet groups\", function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -1762,6 +1779,9 @@
 								"id": "04f2fdcc-8b86-44df-bde8-f9121d6f5596",
 								"exec": [
 									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Receive info of flet group with id - \"+pm.collectionVariables.get(\"group_id\"), function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -1811,6 +1831,9 @@
 								"id": "30e7c5ce-82e1-4496-add5-0c67667a9268",
 								"exec": [
 									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Update flet group with id - \"+pm.collectionVariables.get(\"group_id\"), function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -1868,6 +1891,9 @@
 							"script": {
 								"id": "f7caf6c6-481d-4945-afbd-4357b0204959",
 								"exec": [
+									"pm.test(\"Dellet group with id - \"+pm.collectionVariables.get(\"group_id\"), function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 204\", function () {",
 									"    pm.response.to.have.status(204);",
 									"});",
@@ -2106,6 +2132,8 @@
 							"script": {
 								"id": "3727c190-c568-40c7-a085-7092a7d5ce65",
 								"exec": [
+									"pm.test(\"Receive info about fleet cars \", function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -2176,11 +2204,11 @@
 									"*/",
 									"",
 									"",
-									"var VIN=\"false\";",
-									"console.log(responseJson.data[0].id);",
-									"console.log(responseJson.data[0].vin);",
+									"// var VIN=\"false\";",
+									"// console.log(responseJson.data[0].id);",
+									"// console.log(responseJson.data[0].vin);",
 									"",
-									"console.log(\"### \"+responseJson.data.length);",
+									"// console.log(\"### \"+responseJson.data.length);",
 									"",
 									"",
 									"for (i=0; i< responseJson.data.length; i++ ){",
@@ -2197,11 +2225,14 @@
 									"    }",
 									"}",
 									"",
-									"    console.log(\"##### \"+VIN);",
+									"    // console.log(\"##### \"+VIN);",
 									"",
-									"    console.log(pm.globals.get(\"VIN_id\"));",
-									"    console.log(pm.collectionVariables.get(\"VIN_id\"));",
-									"    console.log(pm.environment.get(\"VIN_id\"));",
+									"    // console.log(pm.globals.get(\"VIN_id\"));",
+									"    // console.log(pm.collectionVariables.get(\"VIN_id\"));",
+									"    // console.log(pm.environment.get(\"VIN_id\"));",
+									"",
+									"pm.test(\"Receive list of all active fleet cars  \", function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -2315,6 +2346,9 @@
 								"exec": [
 									"let responseJson = pm.response.json();",
 									"",
+									"pm.test(\"Receive list of all planned maintenance  \", function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -2325,8 +2359,10 @@
 									"});",
 									"",
 									"pm.test(\"The response has all properties\", () => {",
-									"    pm.expect(responseJson.data[0]).to.have.any.keys('id');",
-									"    pm.expect(responseJson.data[0]).to.have.property('day');",
+									"    pm.expect(responseJson.meta.pagination).to.have.any.keys('total');",
+									"    pm.expect(responseJson.meta.pagination).to.have.property('count');",
+									"    pm.expect(responseJson.meta.pagination.links).to.be.an('object');",
+									"    pm.expect(responseJson.success).to.equal(true);",
 									"    pm.expect(responseJson.data[0].object_id).to.be.a('string');",
 									"    pm.expect(responseJson.data[0].object_name).to.equal('2013 Ford Transit Connect (Vehicle 3)');",
 									"});"
@@ -2387,6 +2423,9 @@
 								"id": "2d67e7df-dfeb-46d6-b84e-d7dcd66525da",
 								"exec": [
 									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Receive list of all work-order  \", function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -2463,6 +2502,9 @@
 								"exec": [
 									"let responseJson = pm.response.json();",
 									"",
+									"pm.test(\"Assign work-order \", function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -2531,6 +2573,9 @@
 								"exec": [
 									"let responseJson = pm.response.json();",
 									"",
+									"pm.test(\"Check that car can't disable when work-order for this car is assigned\", function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -2589,6 +2634,9 @@
 								"exec": [
 									"let responseJson = pm.response.json();",
 									"",
+									"pm.test(\"Reject work-order \", function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -2646,6 +2694,9 @@
 								"id": "a368c75e-2daa-49e7-8a15-03816fea5f0d",
 								"exec": [
 									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Check that car disable after reject work-order. Car with id - \"+pm.collectionVariables.get(\"car_id\"), function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -2752,13 +2803,18 @@
 								"exec": [
 									"let responseJson = pm.response.json();",
 									"",
-									"var VIN=\"false\";",
+									"var vin=\"false\";",
+									"var car=\"false\"",
 									"",
 									"for (i=0; i< responseJson.data.length; i++ ){",
-									"    if (responseJson.data[i].id==pm.globals.get(\"car_id\")){",
-									"        VIN = responseJson.data[i].vin;",
+									"    if (responseJson.data[i].id==pm.collectionVariables.get(\"car_id\")){",
+									"        vin = responseJson.data[i].vin;",
+									"        car = responseJson.data[i].id;",
 									"    }",
 									"}",
+									"",
+									"pm.test(\"Receive list of all disabled fleet cars \", function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -2774,7 +2830,8 @@
 									"    pm.expect(responseJson.data[0]).to.have.property('user_id');",
 									"    pm.expect(responseJson.data[0].vin).to.be.a('string');",
 									"    pm.expect(responseJson.data[0].groups).to.be.an('array');",
-									"    pm.expect(VIN).to.equal(pm.environment.get(\"VIN_id\"));",
+									"    pm.expect(vin).to.equal(pm.collectionVariables.get(\"VIN_id\"));",
+									"    pm.expect(car).to.equal(pm.collectionVariables.get(\"car_id\"));",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2827,6 +2884,9 @@
 									"        VIN = responseJson.data[i].vin;",
 									"    }",
 									"}",
+									"",
+									"pm.test(\"Receive list of issues the car with VIN  - \"+pm.collectionVariables.get(\"VIN_id\"), function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -2924,6 +2984,9 @@
 									"    }",
 									"}",
 									"",
+									"pm.test(\"Receive list of fleets inspections for car with VIN  - \"+pm.collectionVariables.get(\"VIN_id\"), function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -3012,6 +3075,9 @@
 								"exec": [
 									"let responseJson = pm.response.json();",
 									"",
+									"pm.test(\"Activate car with id - \"+pm.collectionVariables.get(\"car_id\"), function () {",
+									"});",
+									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
@@ -3070,17 +3136,22 @@
 								"exec": [
 									"let responseJson = pm.response.json();",
 									"",
-									"var VIN=\"false\";",
+									"var vin=\"false\";",
+									"var car=\"false\";",
 									"",
 									"for (i=0; i< responseJson.data.length; i++ ){",
-									"    if (responseJson.data[i].id==pm.globals.get(\"car_id\")){",
-									"        VIN = responseJson.data[i].vin;",
+									"    if (responseJson.data[i].id==pm.collectionVariables.get(\"car_id\")){",
+									"        vin = responseJson.data[i].vin;",
+									"        car = responseJson.data[i].id;",
 									"",
-									"        pm.globals.set(\"VIN_id\", responseJson.data[i].vin);",
-									"        pm.collectionVariables.set(\"VIN_id\", responseJson.data[i].vin);",
-									"        pm.environment.set(\"VIN_id\", responseJson.data[i].vin);",
+									"        // pm.globals.set(\"VIN_id\", responseJson.data[i].vin);",
+									"        // pm.collectionVariables.set(\"VIN_id\", responseJson.data[i].vin);",
+									"        // pm.environment.set(\"VIN_id\", responseJson.data[i].vin);",
 									"    }",
 									"}",
+									"",
+									"pm.test(\"Check that car is activated with id - \"+ pm.collectionVariables.get(\"car_id\"), function () {",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -3096,8 +3167,15 @@
 									"    pm.expect(responseJson.data[0]).to.have.property('user_id');",
 									"    pm.expect(responseJson.data[0].vin).to.be.a('string');",
 									"    pm.expect(responseJson.data[0].groups).to.be.an('array');",
-									"    pm.expect(VIN).to.equal(pm.environment.get(\"VIN_id\"));",
-									"});"
+									"    pm.expect(vin).to.equal(pm.collectionVariables.get(\"VIN_id\"));",
+									"    pm.expect(car).to.equal(pm.collectionVariables.get(\"car_id\"));",
+									"});",
+									"",
+									"    console.log(\"Global veriables = \"+pm.collectionVariables.get(\"VIN_id\"));",
+									"    console.log(\"Global veriables = \"+pm.collectionVariables.get(\"car_id\"));",
+									"    console.log(\"Test veriables = \"+vin);",
+									"    console.log(\"Test veriables = \"+car);",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -3202,47 +3280,47 @@
 	],
 	"variable": [
 		{
-			"id": "1c5d8e4c-bd87-46f9-85ea-da3141227628",
+			"id": "c4e82f6e-2929-4317-845a-0d988da6628f",
 			"key": "token_id",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDEwNzM0OTgsImV4cCI6MjU0NzE1NzA5OCwibmJmIjoxNjAxMDczNDk4LCJqdGkiOiJYeWI2OGtoYThCb282TTR4In0.gNedY_Lq0UBwqkasriZRaJmLKrfhh9MovNrLI-pwFp0"
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDEyMjU5MzgsImV4cCI6MjU0NzMwOTUzOCwibmJmIjoxNjAxMjI1OTM4LCJqdGkiOiJoWXlKb2FmR3Nka05QNk9QIn0.mCe-m951DxNzKOxwr1_UXQzsTTMULj-U-AEStQeU1XA"
 		},
 		{
-			"id": "da53bd9a-1d6f-48c4-88f0-6f61085efd41",
+			"id": "753e38e9-8fed-4733-bee8-6309c155c9a6",
 			"key": "user_id",
-			"value": 2886
+			"value": 2909
 		},
 		{
-			"id": "54bbb23f-3522-4c42-8480-9cbac812552f",
+			"id": "91647e42-af90-4652-8ac9-d4fd30dfa505",
 			"key": "group_id",
-			"value": 265
+			"value": 288
 		},
 		{
-			"id": "d8ae10c3-1479-4718-ad29-6310b6b693f5",
+			"id": "2ff64c63-dc3b-4a20-919c-cfee6639b28d",
 			"key": "role_id",
-			"value": 271
+			"value": 294
 		},
 		{
-			"id": "3cd8fe9c-1bf3-4b99-8877-f2b7fc79222a",
+			"id": "dacff5b5-6a17-4fb2-a354-2d36f2b46379",
 			"key": "uuid",
 			"value": "0d440c50-f82c-11ea-9ba9-79990f4e24d7"
 		},
 		{
-			"id": "08ec2939-647c-4292-a71e-212b4f4acfc4",
+			"id": "31bd5abd-9ae0-445d-ac35-54ebc327469d",
 			"key": "sand",
 			"value": "https://sandbox.driveroo.com"
 		},
 		{
-			"id": "4f370ed6-97a9-41da-bcc3-f6396d4bcd13",
+			"id": "2bb4ce91-f585-4898-8ccc-2280b3e6ff1c",
 			"key": "prod",
 			"value": "https://www.driveroo.com"
 		},
 		{
-			"id": "50192ef0-8b59-4174-a6c4-f59a963b57bf",
+			"id": "d5169d67-9a4f-411f-9c49-c22f6d2f6e54",
 			"key": "car_id",
 			"value": 14968
 		},
 		{
-			"id": "64492d90-2ea4-43a8-a734-0d39cf60fdf1",
+			"id": "65be2773-983c-44fd-a99d-7cd5bfe9aa27",
 			"key": "VIN_id",
 			"value": "NM0LS6BN4DT175842"
 		}
