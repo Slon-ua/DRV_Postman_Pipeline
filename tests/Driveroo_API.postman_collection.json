@@ -61,14 +61,14 @@
 									"    pm.expect(responseJson.name).to.be.a('string');",
 									"    pm.expect(responseJson.email).to.have.lengthOf(24);",
 									"    pm.expect(responseJson.type).to.eql('fleet');",
-									"    pm.expect(responseJson.email).to.eql(\"ChuckNorris@driveroo.com\"); ",
+									"    pm.expect(responseJson.email).to.eql(\"sergeyk+000@driveroo.com\"); ",
 									"    pm.expect(responseJson.name).to.eql('Chuck Norris');",
 									"    pm.expect(jsonData.email).not.eq(undefined); //To Check if Value is Null",
 									"});",
 									"",
 									"pm.test(\"To check if Value eql in the response \", () => {",
 									"    pm.expect(responseJson.type).to.eql('fleet');",
-									"    pm.expect(responseJson.email).to.eql(\"ChuckNorris@driveroo.com\"); ",
+									"    pm.expect(responseJson.email).to.eql(\"sergeyk+000@driveroo.com\"); ",
 									"    pm.expect(responseJson.name).to.eql('Chuck Norris');",
 									"    pm.expect(jsonData.email).not.eq(undefined); //To Check if Value is Null",
 									"});",
@@ -163,7 +163,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"login\": \"ChuckNorris@driveroo.com\",\n    \"password\": \"123456\",\n    \"device_token\": \"73e879b8-eac0-46df-aa32-16bddadcebff\",\n    \"device_type\": \"web\",\n    \"login_by\": \"manual\"\n}\n",
+							"raw": "{\n    \"login\": \"sergeyk+000@driveroo.com\",\n    \"password\": \"123456\",\n    \"device_token\": \"73e879b8-eac0-46df-aa32-16bddadcebff\",\n    \"device_type\": \"web\",\n    \"login_by\": \"manual\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -826,8 +826,8 @@
 									"    pm.expect(responseJson.data).to.have.any.keys('name');",
 									"    pm.expect(responseJson.data).to.have.property('id');",
 									"    pm.expect(responseJson.data.gender).to.be.a('string');",
-									"    pm.expect(responseJson.data.email).to.have.lengthOf(25);",
-									"    pm.expect(responseJson.data.email).to.eql(\"OzzyOsbourne@driveroo.com\"); ",
+									"    pm.expect(responseJson.data.email).to.have.lengthOf(24);",
+									"    pm.expect(responseJson.data.email).to.eql(\"sergeyk+004@driveroo.com\"); ",
 									"    pm.expect(responseJson.data.name).to.eql('Ozzy Osbourne');",
 									"    pm.expect(responseJson.data.email).not.eq(undefined); //To Check if Value is Null",
 									"});",
@@ -858,7 +858,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"password\": \"qwerty\",\n    \"email\": \"OzzyOsbourne@driveroo.com\",\n    \"phone\": \"7077190997\",\n    \"zip\": \"89104\",\n    \"first_name\": \"Ozzy\",\n    \"last_name\": \"Osbourne\",\n    \"confirm_password\": \"qwerty\",\n    \"role_updatable\": true,\n    \"groups\": [\n        {\n            \"group_id\": 241,\n            \"group_name\": \"Team #2\",\n            \"role_id\": 248,\n            \"role\": \"driver\"\n        }\n    ],\n    \"login\": \"1111\",\n    \"timezone\": \"US/Eastern\",\n    \"language\": \"en\",\n    \"pictureLoaded\": \"\",\n    \"notification_channels\": 0\n}",
+							"raw": "{\n    \"password\": \"qwerty\",\n    \"email\": \"sergeyk+004@driveroo.com\",\n    \"phone\": \"7077190997\",\n    \"zip\": \"89104\",\n    \"first_name\": \"Ozzy\",\n    \"last_name\": \"Osbourne\",\n    \"confirm_password\": \"qwerty\",\n    \"role_updatable\": true,\n    \"groups\": [\n        {\n            \"group_id\": 241,\n            \"group_name\": \"Team #2\",\n            \"role_id\": 248,\n            \"role\": \"driver\"\n        }\n    ],\n    \"login\": \"1111\",\n    \"timezone\": \"US/Eastern\",\n    \"language\": \"en\",\n    \"pictureLoaded\": \"\",\n    \"notification_channels\": 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -891,6 +891,10 @@
 									"var responseJson = pm.response.json();",
 									"",
 									"console.log(responseJson.data.id);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
@@ -949,6 +953,10 @@
 									"",
 									"console.log(responseJson.data.id);",
 									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
 									"    pm.expect(responseJson).to.be.an(\"object\");",
@@ -1004,6 +1012,10 @@
 									"var responseJson = pm.response.json();",
 									"",
 									"console.log(responseJson.data.id);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
@@ -1061,6 +1073,10 @@
 									"",
 									"console.log(responseJson.data.id);",
 									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
 									"    pm.expect(responseJson).to.be.an(\"object\");",
@@ -1116,6 +1132,10 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
 									"    pm.expect(responseJson).to.be.an(\"object\");",
@@ -1162,6 +1182,20 @@
 				},
 				{
 					"name": "/fleets/users/{user_id}/delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "07d1efee-ceb6-4bc5-96b9-ef74f2c4218e",
+								"exec": [
+									"// pm.test(\"Status code is 204\", function () {",
+									"//     pm.response.to.have.status(204);",
+									"// });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1337,6 +1371,9 @@
 									"// получить переменную из любого пространства согласно приоритету",
 									"console.log(\"3 \"+pm.variables.get(\"role_id\"));",
 									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
@@ -1392,6 +1429,10 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
 									"    pm.expect(responseJson).to.be.an(\"object\");",
@@ -1445,6 +1486,10 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
 									"    pm.expect(responseJson).to.be.an(\"object\");",
@@ -1489,6 +1534,10 @@
 								"id": "bca6795b-529b-4729-a41d-f997fbf3a88e",
 								"exec": [
 									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
@@ -1599,6 +1648,9 @@
 									"console.log(\"3 \"+pm.variables.get(\"group_id\"));",
 									"",
 									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
@@ -1663,6 +1715,10 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
 									"    pm.expect(responseJson).to.be.an(\"object\");",
@@ -1706,6 +1762,10 @@
 								"id": "04f2fdcc-8b86-44df-bde8-f9121d6f5596",
 								"exec": [
 									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
@@ -1751,6 +1811,10 @@
 								"id": "30e7c5ce-82e1-4496-add5-0c67667a9268",
 								"exec": [
 									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
@@ -1963,6 +2027,20 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "cdbaf7bf-8302-4d6b-85f1-32ff0a6f9581",
+								"exec": [
+									"",
+									"",
+									"// pm.test(\"Status code is 200\", function () {",
+									"//     pm.response.to.have.status(200);",
+									"// });"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -2022,6 +2100,21 @@
 				},
 				{
 					"name": "/fleets/cars/stats?group=  ???",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3727c190-c568-40c7-a085-7092a7d5ce65",
+								"exec": [
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2064,7 +2157,120 @@
 							"script": {
 								"id": "275d8594-a3bf-4937-84fc-4ea5b97e8b1a",
 								"exec": [
-									"console.log(pm.globals.get(\"token_id\"));"
+									"// console.log(pm.globals.get(\"token_id\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "aa37e14a-1f93-4398-905b-6c743c3cd837",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"/*",
+									"pm.globals.set(\"car_id\", responseJson.data[0].id);",
+									"pm.collectionVariables.set(\"car_id\", responseJson.data[0].id);",
+									"pm.environment.set(\"car_id\", responseJson.data[0].id);",
+									"*/",
+									"",
+									"",
+									"var VIN=\"false\";",
+									"console.log(responseJson.data[0].id);",
+									"console.log(responseJson.data[0].vin);",
+									"",
+									"console.log(\"### \"+responseJson.data.length);",
+									"",
+									"",
+									"for (i=0; i< responseJson.data.length; i++ ){",
+									"    console.log(responseJson.data[i].id);",
+									"    //if (responseJson.data[i].id==pm.globals.get(\"car_id\")){",
+									"    if (responseJson.data[i].id==14968){",
+									"       VIN = responseJson.data[i].vin;",
+									"",
+									"        pm.globals.set(\"VIN_id\", responseJson.data[i].vin);",
+									"        pm.collectionVariables.set(\"VIN_id\", responseJson.data[i].vin);",
+									"        pm.environment.set(\"VIN_id\", responseJson.data[i].vin);",
+									"",
+									"    //    console.log(\"#### \"+VIN);",
+									"    }",
+									"}",
+									"",
+									"    console.log(\"##### \"+VIN);",
+									"",
+									"    console.log(pm.globals.get(\"VIN_id\"));",
+									"    console.log(pm.collectionVariables.get(\"VIN_id\"));",
+									"    console.log(pm.environment.get(\"VIN_id\"));",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.data[0]).to.have.any.keys('id');",
+									"    pm.expect(responseJson.data[0]).to.have.property('user_id');",
+									"    pm.expect(responseJson.data[0].vin).to.be.a('string');",
+									"    pm.expect(responseJson.data[0].groups).to.be.an('array');",
+									"    pm.expect(VIN).to.equal(pm.environment.get(\"VIN_id\"));",
+									"});",
+									"",
+									"",
+									"/*",
+									"// // Get response",
+									"var jsonData = [{",
+									"    \"pregnancy\": \"1\",",
+									"    \"id\": \"1-116992830\",",
+									"    \"name\": \"British Pregnancy Advisory Service (BPAS)\",",
+									"    \"numberOfLocations\": 78",
+									"    },",
+									"    {",
+									"    \"id\": \"1-1560082724\",",
+									"    \"name\": \"PAMS Pregnancy Ultrasound Centre (PAMS 3D & 4D Baby Imaging)\",",
+									"    \"numberOfLocations\": 1",
+									"    },",
+									"    {",
+									"    \"id\": \"1-2458518720\",",
+									"    \"name\": \" Pregnancy Ultrasound Ltd (Babyface4d)\",",
+									"    \"numberOfLocations\": 1",
+									"    }];",
+									"",
+									"",
+									"var resultCount = jsonData.length;",
+									"",
+									"// Test arrays",
+									"var hasPregnancy = [];",
+									"var doesntHavePregnancy = [];",
+									"",
+									"// Loop through and set arrays with matching data",
+									"for (i = 0; i < resultCount; i++) {",
+									"  var id = jsonData[i].id;",
+									"  var modelString = jsonData[i].name.toLowerCase();",
+									"  if (modelString.includes(\"pregnancy\")) {",
+									"    hasPregnancy.push({",
+									"      \"id\": id,",
+									"      \"hasPregnancy\": modelString.has(\"pregnancy\")",
+									"    });",
+									"  } else {",
+									"    doesntHavePregnancy.push({",
+									"      \"id\": id",
+									"    });",
+									"  }",
+									"}",
+									"",
+									"// Check that each object in response contained keyword and length matches from test",
+									"pm.test(\"Expect response to contain pregnancy in each object\", function() {",
+									"  console.log(hasPregnancy);",
+									"  console.log(doesntHavePregnancy);",
+									"  pm.expect(hasPregnancy.length).to.equal(resultCount);",
+									"});",
+									"",
+									"*/"
 								],
 								"type": "text/javascript"
 							}
@@ -2100,7 +2306,481 @@
 					"response": []
 				},
 				{
+					"name": "/fleets/maintenance/schedulers/list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3d096160-a47f-465c-bfe4-0e59839c2a67",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.data[0]).to.have.any.keys('id');",
+									"    pm.expect(responseJson.data[0]).to.have.property('day');",
+									"    pm.expect(responseJson.data[0].object_id).to.be.a('string');",
+									"    pm.expect(responseJson.data[0].object_name).to.equal('2013 Ford Transit Connect (Vehicle 3)');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/maintenance/schedulers/list?sort=&order=asc&page=1",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"maintenance",
+								"schedulers",
+								"list"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": ""
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fleets/work-order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2d67e7df-dfeb-46d6-b84e-d7dcd66525da",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.data[0]).to.have.any.keys('id');",
+									"    pm.expect(responseJson.data[0]).to.have.property('assign_email');",
+									"    pm.expect(responseJson.data[0].status_string).to.be.a('string');",
+									"    pm.expect(responseJson.data[0].status_string).to.equal('New');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/work-order?sort=&order=desc&page=1&status=",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"work-order"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": ""
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "status",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fleets/work-order/639/assign",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a6591e47-6c1d-4a1c-9f57-1595038d2e1d",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.data).to.have.any.keys('id');",
+									"    pm.expect(responseJson.data).to.have.property('assign_name');",
+									"    pm.expect(responseJson.data.assign_email).to.be.a('string');",
+									"    pm.expect(responseJson.data.assign_email).to.equal('sergeyk+003@driveroo.com');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"assign_name\":\"Freddie  Mercury\",\"assign_email\":\"sergeyk+003@driveroo.com\",\"assign_phone\":\"+17787222125\",\"overdue_to\":\"2020-09-27\",\"user_id\":2858,\"assigned_user_id\":\"\",\"isExitUser\":\"company\",\"approve_amount\":\"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/work-order/639/assign",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"work-order",
+								"639",
+								"assign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fleets/cars/{car_id}/disable",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "42b4ffe4-e4a9-45fe-9e7c-59bcc88a3eba",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson).to.have.any.keys('success');",
+									"    pm.expect(responseJson).to.have.property('success');",
+									"    pm.expect(responseJson.success).to.equal(false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/cars/{{car_id}}/disable",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"cars",
+								"{{car_id}}",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fleets/work-order/639/reject",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "042aea0e-ef46-40e5-ac20-09ce7b901dcf",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.data).to.have.any.keys('id');",
+									"    pm.expect(responseJson.data).to.have.property('created_at');",
+									"    pm.expect(responseJson.data.status_string).to.equal('New');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/work-order/639/reject",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"work-order",
+								"639",
+								"reject"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fleets/cars/{{car_id}}/disable",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a368c75e-2daa-49e7-8a15-03816fea5f0d",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson).to.have.any.keys('success');",
+									"    pm.expect(responseJson).to.have.property('success');",
+									"    pm.expect(responseJson.success).to.equal(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/cars/{{car_id}}/disable",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"cars",
+								"{{car_id}}",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fleets/users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/users?page=1&car=14968&abilities[0]=issue-resolve&",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "car",
+									"value": "14968"
+								},
+								{
+									"key": "abilities[0]",
+									"value": "issue-resolve"
+								},
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/fleets/cars/status/disabled",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6ee43452-0b84-4f22-9da2-9be77a6ce74e",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"var VIN=\"false\";",
+									"",
+									"for (i=0; i< responseJson.data.length; i++ ){",
+									"    if (responseJson.data[i].id==pm.globals.get(\"car_id\")){",
+									"        VIN = responseJson.data[i].vin;",
+									"    }",
+									"}",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.data[0]).to.have.any.keys('id');",
+									"    pm.expect(responseJson.data[0]).to.have.property('user_id');",
+									"    pm.expect(responseJson.data[0].vin).to.be.a('string');",
+									"    pm.expect(responseJson.data[0].groups).to.be.an('array');",
+									"    pm.expect(VIN).to.equal(pm.environment.get(\"VIN_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2131,7 +2811,226 @@
 					"response": []
 				},
 				{
+					"name": "{{sand}}/userApi/fleets/issues?severity=&status=&car={{VIN_id}}&sort=date&order=desc&page=1&group=",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fe7494ad-4931-478e-acb1-b9bd8e18cd9a",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"var VIN=\"false\";",
+									"",
+									"for (i=0; i< responseJson.data.length; i++ ){",
+									"    if (responseJson.data[i].id==pm.globals.get(\"car_id\")){",
+									"        VIN = responseJson.data[i].vin;",
+									"    }",
+									"}",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.meta.pagination).to.have.any.keys('total');",
+									"    pm.expect(responseJson.meta.pagination).to.have.property('count');",
+									"    pm.expect(responseJson.meta.pagination.links).to.be.an('array');",
+									"    pm.expect(responseJson.data).to.be.an('array');",
+									"    pm.expect(VIN).to.equal('false');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/issues?severity=&status=&car={{VIN_id}}&sort=date&order=desc&page=1&group=",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"issues"
+							],
+							"query": [
+								{
+									"key": "severity",
+									"value": ""
+								},
+								{
+									"key": "status",
+									"value": ""
+								},
+								{
+									"key": "car",
+									"value": "{{VIN_id}}"
+								},
+								{
+									"key": "sort",
+									"value": "date"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "group",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{sand}}/userApi/fleets/inspections?car={{VIN_id}}&sort=&order=desc&page=1&dateFrom=2020-09-18&dateTo=2020-09-25&group=",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aef38e0-2bfd-4231-9a1c-728cf6167f6f",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"var VIN=\"false\";",
+									"",
+									"for (i=0; i< responseJson.data.length; i++ ){",
+									"    if (responseJson.data[i].id==pm.globals.get(\"car_id\")){",
+									"        VIN = responseJson.data[i].vin;",
+									"    }",
+									"}",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.meta.pagination).to.have.any.keys('total');",
+									"    pm.expect(responseJson.meta.pagination).to.have.property('count');",
+									"    pm.expect(responseJson.meta.pagination.links).to.be.an('array');",
+									"    pm.expect(responseJson.data).to.be.an('array');",
+									"    pm.expect(VIN).to.equal('false');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/inspections?car={{VIN_id}}&sort=&order=desc&page=1&dateFrom=2020-09-18&dateTo=2020-09-25&group=",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"inspections"
+							],
+							"query": [
+								{
+									"key": "car",
+									"value": "{{VIN_id}}"
+								},
+								{
+									"key": "sort",
+									"value": ""
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "dateFrom",
+									"value": "2020-09-18"
+								},
+								{
+									"key": "dateTo",
+									"value": "2020-09-25"
+								},
+								{
+									"key": "group",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/fleets/cars/{car_id}/active",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0dabb2c6-a8f8-465f-8071-6f0e00a15bab",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson).to.have.any.keys('success');",
+									"    pm.expect(responseJson).to.have.property('success');",
+									"    pm.expect(responseJson.success).to.equal(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2162,7 +3061,48 @@
 					"response": []
 				},
 				{
-					"name": "/fleets/cars/{car_id}/disable",
+					"name": "/fleets/cars/status/active/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c85e76b9-45d2-40cd-8098-caeeb58c1cf7",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"var VIN=\"false\";",
+									"",
+									"for (i=0; i< responseJson.data.length; i++ ){",
+									"    if (responseJson.data[i].id==pm.globals.get(\"car_id\")){",
+									"        VIN = responseJson.data[i].vin;",
+									"",
+									"        pm.globals.set(\"VIN_id\", responseJson.data[i].vin);",
+									"        pm.collectionVariables.set(\"VIN_id\", responseJson.data[i].vin);",
+									"        pm.environment.set(\"VIN_id\", responseJson.data[i].vin);",
+									"    }",
+									"}",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.data[0]).to.have.any.keys('id');",
+									"    pm.expect(responseJson.data[0]).to.have.property('user_id');",
+									"    pm.expect(responseJson.data[0].vin).to.be.a('string');",
+									"    pm.expect(responseJson.data[0].groups).to.be.an('array');",
+									"    pm.expect(VIN).to.equal(pm.environment.get(\"VIN_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2174,10 +3114,10 @@
 								}
 							]
 						},
-						"method": "PUT",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{sand}}/userApi/fleets/cars/{{car_id}}/disable",
+							"raw": "{{sand}}/userApi/fleets/cars/status/active",
 							"host": [
 								"{{sand}}"
 							],
@@ -2185,8 +3125,8 @@
 								"userApi",
 								"fleets",
 								"cars",
-								"{{car_id}}",
-								"disable"
+								"status",
+								"active"
 							]
 						}
 					},
@@ -2262,44 +3202,49 @@
 	],
 	"variable": [
 		{
-			"id": "9ea666cc-eb9f-4c39-b3cd-7fba80ba009e",
+			"id": "1c5d8e4c-bd87-46f9-85ea-da3141227628",
 			"key": "token_id",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDA5ODU4MDQsImV4cCI6MjU0NzA2OTQwNCwibmJmIjoxNjAwOTg1ODA0LCJqdGkiOiIyaU9vTHJmRnc1ZFI1bmpMIn0.Kynfzu8bX7xpruDxA4G6S8UWo3VIA9GFXtLdL0YzWsA"
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDEwNzM0OTgsImV4cCI6MjU0NzE1NzA5OCwibmJmIjoxNjAxMDczNDk4LCJqdGkiOiJYeWI2OGtoYThCb282TTR4In0.gNedY_Lq0UBwqkasriZRaJmLKrfhh9MovNrLI-pwFp0"
 		},
 		{
-			"id": "102ce290-735c-443d-9dd4-e5e026bcd86c",
+			"id": "da53bd9a-1d6f-48c4-88f0-6f61085efd41",
 			"key": "user_id",
-			"value": 2874
+			"value": 2886
 		},
 		{
-			"id": "ef9534ce-89f5-4590-a2d7-9f6bffc6eec3",
+			"id": "54bbb23f-3522-4c42-8480-9cbac812552f",
 			"key": "group_id",
-			"value": 253
+			"value": 265
 		},
 		{
-			"id": "74920e77-39e6-465e-82f1-0f5bca1e6f44",
+			"id": "d8ae10c3-1479-4718-ad29-6310b6b693f5",
 			"key": "role_id",
-			"value": 259
+			"value": 271
 		},
 		{
-			"id": "f01742b8-1d99-48f3-b6a2-73965d878a2a",
+			"id": "3cd8fe9c-1bf3-4b99-8877-f2b7fc79222a",
 			"key": "uuid",
 			"value": "0d440c50-f82c-11ea-9ba9-79990f4e24d7"
 		},
 		{
-			"id": "19ad4f73-7e05-49d3-839d-787bc085a99e",
+			"id": "08ec2939-647c-4292-a71e-212b4f4acfc4",
 			"key": "sand",
 			"value": "https://sandbox.driveroo.com"
 		},
 		{
-			"id": "9d2b6f35-bc8d-46b8-9d94-9fbb925daf64",
+			"id": "4f370ed6-97a9-41da-bcc3-f6396d4bcd13",
 			"key": "prod",
 			"value": "https://www.driveroo.com"
 		},
 		{
-			"id": "3f7aae86-4482-4e97-961c-2715de09ff4a",
+			"id": "50192ef0-8b59-4174-a6c4-f59a963b57bf",
 			"key": "car_id",
-			"value": ""
+			"value": 14968
+		},
+		{
+			"id": "64492d90-2ea4-43a8-a734-0d39cf60fdf1",
+			"key": "VIN_id",
+			"value": "NM0LS6BN4DT175842"
 		}
 	],
 	"protocolProfileBehavior": {}
