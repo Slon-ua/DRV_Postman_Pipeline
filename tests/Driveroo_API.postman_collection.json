@@ -3271,8 +3271,8 @@
 									"var VIN=\"false\";",
 									"",
 									"for (i=0; i< responseJson.data.length; i++ ){",
-									"    if (responseJson.data[i].id==pm.globals.get(\"car_id\")){",
-									"        VIN = responseJson.data[i].vin;",
+									"    if (responseJson.data[i].vehicle.id==pm.globals.get(\"car_id\")){",
+									"        VIN = responseJson.data[i].vehicle.vin;",
 									"    }",
 									"}",
 									"",
@@ -3293,7 +3293,7 @@
 									"    pm.expect(responseJson.meta.pagination).to.have.property('count');",
 									"    pm.expect(responseJson.meta.pagination.links).to.be.an('array');",
 									"    pm.expect(responseJson.data).to.be.an('array');",
-									"    pm.expect(VIN).to.equal('false');",
+									"    pm.expect(VIN).to.equal(pm.globals.get(\"VIN_id\"));",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3564,57 +3564,57 @@
 	],
 	"variable": [
 		{
-			"id": "06f8267c-fe5f-41de-a092-7dea8465a32f",
+			"id": "cd724a5a-55dc-451c-8250-4a8e912dde83",
 			"key": "token_id",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDE2NDA4NTEsImV4cCI6MjU0NzcyNDQ1MSwibmJmIjoxNjAxNjQwODUxLCJqdGkiOiIwdEc4ZHAzRG43NXZsNzlpIn0.prka9COK6BS_wT1INwgyxiDyK0eB30DHR_Zfrt4LfN4"
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDE2NDI4MDcsImV4cCI6MjU0NzcyNjQwNywibmJmIjoxNjAxNjQyODA3LCJqdGkiOiIyMmt5RFFuRHlaSk1QMk1oIn0.g_DsAim8EoikXiBJ4kukNMCyel3iDUzdgHpBgEh2m6M"
 		},
 		{
-			"id": "24eee498-4321-4213-9581-8d0a3d9646d6",
+			"id": "abf37ef3-22ca-4403-8974-5d3aa71088ff",
 			"key": "user_id",
-			"value": 2966
+			"value": 2971
 		},
 		{
-			"id": "7cea15ad-6ac4-4c9b-9dfa-7c9e9d81a81c",
+			"id": "44c6f3ff-73a4-4c7c-b98c-ad7da17672e1",
 			"key": "group_id",
-			"value": 342
+			"value": 347
 		},
 		{
-			"id": "98197ad9-f0c5-43c5-8c3f-f295529e7c13",
+			"id": "3c9db478-99ca-48e4-af09-7932e1a2d32f",
 			"key": "role_id",
-			"value": 346
+			"value": 351
 		},
 		{
-			"id": "e29df862-3be8-4622-a7db-1b397ce8d2ad",
+			"id": "fc37b569-a0e4-480c-b7db-f1c22c1eadbc",
 			"key": "uuid",
 			"value": "0d440c50-f82c-11ea-9ba9-79990f4e24d7"
 		},
 		{
-			"id": "0e317f21-e3e2-4a99-bf77-cf7b89788305",
+			"id": "35e4fe41-35de-4a11-94fb-c6808cbcd18a",
 			"key": "sand",
 			"value": "https://sandbox.driveroo.com"
 		},
 		{
-			"id": "dbec8b23-b48c-47f5-9e0c-2301441c0347",
+			"id": "929b99a1-8430-4a44-92fd-8da241f08ba5",
 			"key": "prod",
 			"value": "https://www.driveroo.com"
 		},
 		{
-			"id": "3a37ae54-c332-435d-b36b-efe9abca0a16",
+			"id": "f81c7d38-c65d-4a3f-a9e2-1ff98a932fdd",
 			"key": "car_id",
 			"value": "14968"
 		},
 		{
-			"id": "50aeacf6-06f1-4a15-a352-823d86aaa07b",
+			"id": "6d5f399d-9be7-4dfd-bef9-b3cbf9f4b276",
 			"key": "VIN_id",
 			"value": "NM0LS6BN4DT175842"
 		},
 		{
-			"id": "032d0567-546a-4a4b-b70d-e2dabe5adef6",
+			"id": "93329e8a-e7eb-4bb7-8d25-97f5367228ec",
 			"key": "API_keys",
 			"value": "fe825311-67ae-49e3-b437-cea6e31587bd"
 		},
 		{
-			"id": "6581ab3a-f51e-43e0-bd3f-25ed29b45c18",
+			"id": "3caa48eb-be7a-4073-b955-8ab0e0fa9890",
 			"key": "requestID",
 			"value": "5335752"
 		}
