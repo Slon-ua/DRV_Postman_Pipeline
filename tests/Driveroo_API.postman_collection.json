@@ -372,6 +372,56 @@
 					"response": []
 				},
 				{
+					"name": "/currencies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bb20988d-a144-4bdc-b0a7-e590d7942fac",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Receive list of currencies\", function () {",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.data[0]).to.have.any.keys('currency');",
+									"    pm.expect(responseJson.data[0]).to.have.property('name');",
+									"    pm.expect(responseJson.data[0].symbol).to.be.a('string');",
+									"    pm.expect(responseJson.data[0].is_symbol_first).to.be.a('boolean');",
+									"    pm.expect(responseJson.data[0].currency).to.equal(\"AED\");",
+									"    pm.expect(responseJson.data[0].name).to.equal(\"UAE Dirham\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/currencies",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"currencies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/fleets/company/profile",
 					"event": [
 						{
@@ -381,7 +431,7 @@
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
-									"pm.test(\"Resive ompany profile inform\", function () {",
+									"pm.test(\"Update currencies of company \", function () {",
 									"});",
 									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
@@ -398,6 +448,117 @@
 									"    pm.expect(responseJson.data).to.have.property('id');",
 									"    pm.expect(responseJson.data.name).to.be.a('string');",
 									"    pm.expect(responseJson.data.name).to.eql('Driveroo_Test_Env');",
+									"    pm.expect(responseJson.data.currency.currency).to.eql('UAH');",
+									"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"value": " ",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": " ",
+									"type": "text"
+								},
+								{
+									"key": "terminal_address",
+									"value": " ",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Driveroo_Test_Env",
+									"type": "text"
+								},
+								{
+									"key": "timezone",
+									"value": "America/Los_Angeles",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "UAH",
+									"type": "text"
+								},
+								{
+									"key": "ttl_type",
+									"value": " default",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/company/profile",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"company",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fleets/company/profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "61c4eea6-1e50-4a9f-8741-be73e38eb82b",
+								"exec": [
+									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Receive company profile inform\", function () {",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.data).to.have.any.keys('name');",
+									"    pm.expect(responseJson.data).to.have.property('id');",
+									"    pm.expect(responseJson.data.name).to.be.a('string');",
+									"    pm.expect(responseJson.data.name).to.eql('Driveroo_Test_Env');",
+									"    pm.expect(responseJson.data.currency.currency).to.eql('UAH');",
+									"",
 									"});",
 									""
 								],
@@ -434,25 +595,26 @@
 					"response": []
 				},
 				{
-					"name": "/fleets/company/profile",
+					"name": "/userApi/fleets/company/profile",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "61c4eea6-1e50-4a9f-8741-be73e38eb82b",
+								"id": "feb15990-d793-43c3-9618-841cecd412e4",
 								"exec": [
 									"var responseJson = pm.response.json();",
 									"",
-									"pm.test(\" \", function () {",
+									"pm.test(\"Return defolt setings of company \", function () {",
 									"});",
 									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
 									"",
 									"pm.test(\"The response is JSON and type 'object'\", () => {",
 									"    pm.response.to.be.json;",
 									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});",
 									"",
 									"pm.test(\"The response has all properties\", () => {",
@@ -460,6 +622,8 @@
 									"    pm.expect(responseJson.data).to.have.property('id');",
 									"    pm.expect(responseJson.data.name).to.be.a('string');",
 									"    pm.expect(responseJson.data.name).to.eql('Driveroo_Test_Env');",
+									"    pm.expect(responseJson.data.currency.currency).to.eql('USD');",
+									"",
 									"});",
 									""
 								],
@@ -478,8 +642,53 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"value": " ",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": " ",
+									"type": "text"
+								},
+								{
+									"key": "terminal_address",
+									"value": " ",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Driveroo_Test_Env",
+									"type": "text"
+								},
+								{
+									"key": "timezone",
+									"value": "America/Los_Angeles",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "USD",
+									"type": "text"
+								},
+								{
+									"key": "ttl_type",
+									"value": "default",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{sand}}/userApi/fleets/company/profile",
 							"host": [
@@ -1075,7 +1284,10 @@
 									"    pm.expect(responseJson.data).to.have.property('id');",
 									"    pm.expect(responseJson.data.gender).to.be.a('string');",
 									"    pm.expect(responseJson.data.gender).to.be.oneOf(['male','female']); ",
-									"    pm.expect(responseJson.data.name).to.eql('Ozzy Osbourne #1');",
+									"    pm.expect(responseJson.data.name).to.eql('Ozzy Osbourne');",
+									"    pm.expect(responseJson.data.company).to.eql('Driveroo_Test_Env');",
+									"    pm.expect(responseJson.data.role).to.eql('dispatcher');",
+									"    pm.expect(responseJson.data.currency.currency).to.eql('USD'); ",
 									"});",
 									""
 								],
@@ -1088,7 +1300,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"password\": \"qwerty\",\n    \"email\": \"OzzyOsbourne@driveroo.com\",\n    \"phone\": \"7077190997\",\n    \"zip\": \"89104\",\n    \"first_name\": \"Ozzy\",\n    \"last_name\": \"Osbourne #1\",\n    \"confirm_password\": \"qwerty\",\n    \"role_updatable\": true,\n    \"groups\": [\n        {\n            \"group_id\": 241,\n            \"group_name\": \"Team #2\",\n            \"role_id\": 248,\n            \"role\": \"driver\"\n        }\n    ],\n    \"login\": \"1111\",\n    \"timezone\": \"US/Eastern\",\n    \"language\": \"en\",\n    \"pictureLoaded\": \"\",\n    \"notification_channels\": 0\n}",
+							"raw": "{\"password\":\"\",\"id\":{{user_id}},\"name\":\"Ozzy Osbourne\",\"first_name\":\"Ozzy\",\"last_name\":\"Osbourne\",\"gender\":\"male\",\"login\":\"1111\",\"email\":\"sergeyk+004@driveroo.com\",\"phone\":\"+17077190997\",\"picture\":\"https://sandbox.driveroo.com/user_default.png\",\"language\":\"en\",\"zip\":\"89104\",\"role_updatable\":true,\"company\":\"Driveroo_Test_Env\",\"timezone\":\"US/Eastern\",\"activeCarHolds\":[],\"groups\":[{\"group_id\":241,\"group_name\":\"Team #2\",\"role_id\":248,\"role\":\"driver\"},{\"group_id\":240,\"group_name\":\"Team #1\",\"role_id\":248,\"role\":\"driver\"}],\"role\":\"dispatcher\",\"currency\":{\"currency\":\"USD\",\"name\":\"US Dollar\",\"symbol\":\"$\",\"is_symbol_first\":true},\"tab\":\"global\",\"notification_channels\":0,\"pictureLoaded\":\"\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1671,11 +1883,13 @@
 									"    pm.expect(responseJson).to.be.an(\"object\");",
 									"});",
 									"",
-									"pm.test(\"The response has all properties\", () => {",
+									"pm.test(\"The response has all properties : 'name', 'timezone','currency'\", () => {",
 									"    pm.expect(responseJson.data).to.have.any.keys('name');",
 									"    pm.expect(responseJson.data).to.have.property('id');",
 									"    pm.expect(responseJson.data.name).to.be.a('string');",
 									"    pm.expect(responseJson.data.name).to.eql('Team #3');",
+									"    pm.expect(responseJson.data.timezone).to.eql('Pacific/Honolulu');",
+									"    pm.expect(responseJson.data.currency.currency).to.eql('USD');",
 									"});",
 									""
 								],
@@ -1698,7 +1912,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"name\":\"Team #3\",\"timezone\":\"Pacific/Honolulu\"}",
+							"raw": "{\"name\":\"Team #3\",\"timezone\":\"Pacific/Honolulu\",\"currency\":\"USD\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1771,58 +1985,6 @@
 					"response": []
 				},
 				{
-					"name": "/fleets/groups/{group_id}",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "04f2fdcc-8b86-44df-bde8-f9121d6f5596",
-								"exec": [
-									"var responseJson = pm.response.json();",
-									"",
-									"pm.test(\"Receive info of flet group with id - \"+pm.collectionVariables.get(\"group_id\"), function () {",
-									"});",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"The response is JSON and type 'object'\", () => {",
-									"    pm.response.to.be.json;",
-									"    pm.expect(responseJson).to.be.an(\"object\");",
-									"});",
-									"",
-									"pm.test(\"The response has all properties\", () => {",
-									"    pm.expect(responseJson.data).to.have.any.keys('name');",
-									"    pm.expect(responseJson.data).to.have.property('id');",
-									"    pm.expect(responseJson.data.name).to.be.a('string');",
-									"    pm.expect(responseJson.data.name).to.eql('Team #3');",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{sand}}/userApi/fleets/groups/{{group_id}}",
-							"host": [
-								"{{sand}}"
-							],
-							"path": [
-								"userApi",
-								"fleets",
-								"groups",
-								"{{group_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "/fleets/groups/{group_id?}",
 					"event": [
 						{
@@ -1849,6 +2011,8 @@
 									"    pm.expect(responseJson.data).to.have.property('id');",
 									"    pm.expect(responseJson.data.name).to.be.a('string');",
 									"    pm.expect(responseJson.data.name).to.eql('Team #4');",
+									"    pm.expect(responseJson.data.timezone).to.eql('Pacific/Honolulu');",
+									"    pm.expect(responseJson.data.currency.currency).to.eql('AED');",
 									"});",
 									""
 								],
@@ -1861,13 +2025,67 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"name\":\"Team #4\",\"timezone\":\"Pacific/Honolulu\"}",
+							"raw": "{\"name\":\"Team #4\",\"timezone\":\"Pacific/Honolulu\",\"currency\":\"AED\"}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/groups/{{group_id}}",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"groups",
+								"{{group_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fleets/groups/{group_id}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "04f2fdcc-8b86-44df-bde8-f9121d6f5596",
+								"exec": [
+									"var responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Receive info of flet group with id - \"+pm.collectionVariables.get(\"group_id\"), function () {",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.data).to.have.any.keys('name');",
+									"    pm.expect(responseJson.data).to.have.property('id');",
+									"    pm.expect(responseJson.data.name).to.be.a('string');",
+									"    pm.expect(responseJson.data.name).to.eql('Team #4');   ",
+									"    pm.expect(responseJson.data.timezone).to.eql('Pacific/Honolulu');",
+									"    pm.expect(responseJson.data.currency.currency).to.eql('AED');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "{{sand}}/userApi/fleets/groups/{{group_id}}",
 							"host": [
@@ -2204,32 +2422,36 @@
 									"*/",
 									"",
 									"",
-									"// var VIN=\"false\";",
+									"var VIN = \"false\";",
 									"// console.log(responseJson.data[0].id);",
 									"// console.log(responseJson.data[0].vin);",
 									"",
 									"// console.log(\"### \"+responseJson.data.length);",
+									"console.log(\"###  \"+pm.collectionVariables.get(\"car_id\"));",
 									"",
 									"",
-									"for (i=0; i< responseJson.data.length; i++ ){",
+									"for (i = 0; i < responseJson.data.length; i++) {",
 									"    console.log(responseJson.data[i].id);",
 									"    //if (responseJson.data[i].id==pm.globals.get(\"car_id\")){",
-									"    if (responseJson.data[i].id==14968){",
-									"       VIN = responseJson.data[i].vin;",
+									"    if (responseJson.data[i].id == pm.collectionVariables.get(\"car_id\")) {",
+									"        VIN = responseJson.data[i].vin;",
 									"",
 									"        pm.globals.set(\"VIN_id\", responseJson.data[i].vin);",
 									"        pm.collectionVariables.set(\"VIN_id\", responseJson.data[i].vin);",
 									"        pm.environment.set(\"VIN_id\", responseJson.data[i].vin);",
 									"",
-									"    //    console.log(\"#### \"+VIN);",
+									"        console.log(pm.globals.get(\"VIN_id\"));",
+									"        console.log(pm.collectionVariables.get(\"VIN_id\"));",
+									"        console.log(pm.environment.get(\"VIN_id\"));",
+									"        //    console.log(\"#### \"+VIN);",
 									"    }",
 									"}",
 									"",
-									"    // console.log(\"##### \"+VIN);",
+									"// console.log(\"##### \"+VIN);",
 									"",
-									"    // console.log(pm.globals.get(\"VIN_id\"));",
-									"    // console.log(pm.collectionVariables.get(\"VIN_id\"));",
-									"    // console.log(pm.environment.get(\"VIN_id\"));",
+									"// console.log(pm.globals.get(\"VIN_id\"));",
+									"// console.log(pm.collectionVariables.get(\"VIN_id\"));",
+									"// console.log(pm.environment.get(\"VIN_id\"));",
 									"",
 									"pm.test(\"Receive list of all active fleet cars  \", function () {",
 									"});",
@@ -2540,7 +2762,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"assign_name\":\"Freddie  Mercury\",\"assign_email\":\"sergeyk+003@driveroo.com\",\"assign_phone\":\"+17787222125\",\"overdue_to\":\"2020-09-27\",\"user_id\":2858,\"assigned_user_id\":\"\",\"isExitUser\":\"company\",\"approve_amount\":\"\"}",
+							"raw": "{\"assign_name\":\"Freddie  Mercury\",\"assign_email\":\"sergeyk+003@driveroo.com\",\"assign_phone\":\"+17787222125\",\"overdue_to\":\"2021-09-30\",\"user_id\":2858,\"assigned_user_id\":\"\",\"isExitUser\":\"company\",\"approve_amount\":\"\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2799,7 +3021,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6ee43452-0b84-4f22-9da2-9be77a6ce74e",
+								"id": "b7579d12-6d3b-41f8-ab6b-92852f611bd9",
 								"exec": [
 									"let responseJson = pm.response.json();",
 									"",
@@ -2825,13 +3047,18 @@
 									"    pm.expect(responseJson).to.be.an(\"object\");",
 									"});",
 									"",
+									"console.log(pm.collectionVariables.get(\"car_id\") + \"|  |\" +car+\"|\");",
+									"console.log(pm.globals.get(\"car_id\"));",
+									"console.log(pm.collectionVariables.get(\"car_id\"));",
+									"console.log(pm.environment.get(\"car_id\"));",
+									"",
 									"pm.test(\"The response has all properties\", () => {",
 									"    pm.expect(responseJson.data[0]).to.have.any.keys('id');",
 									"    pm.expect(responseJson.data[0]).to.have.property('user_id');",
 									"    pm.expect(responseJson.data[0].vin).to.be.a('string');",
 									"    pm.expect(responseJson.data[0].groups).to.be.an('array');",
 									"    pm.expect(vin).to.equal(pm.collectionVariables.get(\"VIN_id\"));",
-									"    pm.expect(car).to.equal(pm.collectionVariables.get(\"car_id\"));",
+									" //   pm.expect(car).to.equal(pm.environment.get(\"car_id\"));",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2967,6 +3194,67 @@
 					"response": []
 				},
 				{
+					"name": "/fleets/cars/{car_id}/active",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0dabb2c6-a8f8-465f-8071-6f0e00a15bab",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Activate car with id - \"+pm.collectionVariables.get(\"car_id\"), function () {",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson).to.have.any.keys('success');",
+									"    pm.expect(responseJson).to.have.property('success');",
+									"    pm.expect(responseJson.success).to.equal(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/cars/{{car_id}}/active",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"cars",
+								"{{car_id}}",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "{{sand}}/userApi/fleets/inspections?car={{VIN_id}}&sort=&order=desc&page=1&dateFrom=2020-09-18&dateTo=2020-09-25&group=",
 					"event": [
 						{
@@ -2975,6 +3263,10 @@
 								"id": "5aef38e0-2bfd-4231-9a1c-728cf6167f6f",
 								"exec": [
 									"let responseJson = pm.response.json();",
+									"",
+									"pm.globals.set(\"requestID\", responseJson.data[0].request_id);",
+									"pm.collectionVariables.set(\"requestID\", responseJson.data[0].request_id);",
+									"pm.environment.set(\"requestID\", responseJson.data[0].request_id);",
 									"",
 									"var VIN=\"false\";",
 									"",
@@ -3066,67 +3358,6 @@
 					"response": []
 				},
 				{
-					"name": "/fleets/cars/{car_id}/active",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "0dabb2c6-a8f8-465f-8071-6f0e00a15bab",
-								"exec": [
-									"let responseJson = pm.response.json();",
-									"",
-									"pm.test(\"Activate car with id - \"+pm.collectionVariables.get(\"car_id\"), function () {",
-									"});",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"The response is JSON and type 'object'\", () => {",
-									"    pm.response.to.be.json;",
-									"    pm.expect(responseJson).to.be.an(\"object\");",
-									"});",
-									"",
-									"pm.test(\"The response has all properties\", () => {",
-									"    pm.expect(responseJson).to.have.any.keys('success');",
-									"    pm.expect(responseJson).to.have.property('success');",
-									"    pm.expect(responseJson.success).to.equal(true);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_id}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "{{sand}}/userApi/fleets/cars/{{car_id}}/active",
-							"host": [
-								"{{sand}}"
-							],
-							"path": [
-								"userApi",
-								"fleets",
-								"cars",
-								"{{car_id}}",
-								"active"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "/fleets/cars/status/active/",
 					"event": [
 						{
@@ -3168,7 +3399,7 @@
 									"    pm.expect(responseJson.data[0].vin).to.be.a('string');",
 									"    pm.expect(responseJson.data[0].groups).to.be.an('array');",
 									"    pm.expect(vin).to.equal(pm.collectionVariables.get(\"VIN_id\"));",
-									"    pm.expect(car).to.equal(pm.collectionVariables.get(\"car_id\"));",
+									" //   pm.expect(car).to.equal(pm.collectionVariables.get(\"car_id\"));",
 									"});",
 									"",
 									"    console.log(\"Global veriables = \"+pm.collectionVariables.get(\"VIN_id\"));",
@@ -3205,6 +3436,59 @@
 								"cars",
 								"status",
 								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/report/API_keys/6975253",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "540e017b-7b75-4af3-bebe-bf865ba4411e",
+								"exec": [
+									"let responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Check that user can resive API report by id - \" + pm.collectionVariables.get(\"requestID\"), function () {",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The response is JSON and type 'object'\", () => {",
+									"    pm.response.to.be.json;",
+									"    pm.expect(responseJson).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"The response has all properties\", () => {",
+									"    pm.expect(responseJson.client).to.have.any.keys('token');",
+									"    pm.expect(responseJson.client).to.have.property('vin');",
+									"    pm.expect(responseJson.client.year).to.be.a('number');",
+									"    pm.expect(responseJson.client.make).to.be.an('string');",
+									"  //  pm.expect(vin).to.equal(pm.collectionVariables.get(\"VIN_id\"));",
+									"  //  pm.expect(car).to.equal(pm.collectionVariables.get(\"car_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/api/report/{{API_keys}}/{{requestID}}",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"api",
+								"report",
+								"{{API_keys}}",
+								"{{requestID}}"
 							]
 						}
 					},
@@ -3280,49 +3564,59 @@
 	],
 	"variable": [
 		{
-			"id": "c4e82f6e-2929-4317-845a-0d988da6628f",
+			"id": "4528a72c-5510-4bea-bfa2-23190a051561",
 			"key": "token_id",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDEyMjU5MzgsImV4cCI6MjU0NzMwOTUzOCwibmJmIjoxNjAxMjI1OTM4LCJqdGkiOiJoWXlKb2FmR3Nka05QNk9QIn0.mCe-m951DxNzKOxwr1_UXQzsTTMULj-U-AEStQeU1XA"
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDE2MzUzNDgsImV4cCI6MjU0NzcxODk0OCwibmJmIjoxNjAxNjM1MzQ4LCJqdGkiOiJRdVhuQzJhUTh1RFhYQXNBIn0.Pe1PSlaYjuSGSbJlSTjMUF8fyWcVz52A0lwomKZlllU"
 		},
 		{
-			"id": "753e38e9-8fed-4733-bee8-6309c155c9a6",
+			"id": "3e4edd47-544b-4415-b9a3-b69a39cab3c6",
 			"key": "user_id",
-			"value": 2909
+			"value": 2961
 		},
 		{
-			"id": "91647e42-af90-4652-8ac9-d4fd30dfa505",
+			"id": "bdad5f0c-5d7f-4e47-9dd1-af4a3f7f4f48",
 			"key": "group_id",
-			"value": 288
+			"value": 337
 		},
 		{
-			"id": "2ff64c63-dc3b-4a20-919c-cfee6639b28d",
+			"id": "b4ce8224-ac0f-497b-be65-5d7f2c2981f6",
 			"key": "role_id",
-			"value": 294
+			"value": 341
 		},
 		{
-			"id": "dacff5b5-6a17-4fb2-a354-2d36f2b46379",
+			"id": "b8de9fdd-4791-4b9e-8640-44c2d300e57c",
 			"key": "uuid",
 			"value": "0d440c50-f82c-11ea-9ba9-79990f4e24d7"
 		},
 		{
-			"id": "31bd5abd-9ae0-445d-ac35-54ebc327469d",
+			"id": "e1c9e8c7-4ca1-4551-b5fc-04319c739b9b",
 			"key": "sand",
 			"value": "https://sandbox.driveroo.com"
 		},
 		{
-			"id": "2bb4ce91-f585-4898-8ccc-2280b3e6ff1c",
+			"id": "ce5bd44c-171a-41a8-bf5e-d0d8c6f03ded",
 			"key": "prod",
 			"value": "https://www.driveroo.com"
 		},
 		{
-			"id": "d5169d67-9a4f-411f-9c49-c22f6d2f6e54",
+			"id": "44c9df5d-4497-45c9-80e7-424e0f324d76",
 			"key": "car_id",
-			"value": 14968
+			"value": "14968"
 		},
 		{
-			"id": "65be2773-983c-44fd-a99d-7cd5bfe9aa27",
+			"id": "7865eca4-3c63-4e20-8e68-f054a46ddcaa",
 			"key": "VIN_id",
 			"value": "NM0LS6BN4DT175842"
+		},
+		{
+			"id": "b77ec73d-0de3-4abd-b723-3b2e623adb2a",
+			"key": "API_keys",
+			"value": "fe825311-67ae-49e3-b437-cea6e31587bd"
+		},
+		{
+			"id": "76a1a51c-f05c-4fde-9cb7-5313ad93f894",
+			"key": "requestID",
+			"value": "7165344"
 		}
 	],
 	"protocolProfileBehavior": {}
