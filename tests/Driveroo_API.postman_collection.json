@@ -3271,12 +3271,14 @@
 									"var VIN=\"false\";",
 									"",
 									"for (i=0; i< responseJson.data.length; i++ ){",
-									"    if (responseJson.data[i].vehicle.id==pm.globals.get(\"car_id\")){",
+									"    if (responseJson.data[i].vehicle.id==pm.collectionVariables.get(\"car_id\")){",
 									"        VIN = responseJson.data[i].vehicle.vin;",
 									"    }",
 									"}",
 									"",
-									"pm.test(\"Receive list of fleets inspections for car with VIN  - \"+pm.collectionVariables.get(\"VIN_id\"), function () {",
+									"console.log(pm.collectionVariables.get(\"car_id\")+\"  \"+VIN+\"  \"+pm.environment.get(\"VIN_id\"));",
+									"",
+									"pm.test(\"Receive list of fleets inspections for car with VIN  - \"+pm.environment.get(\"VIN_id\"), function () {",
 									"});",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
@@ -3293,7 +3295,7 @@
 									"    pm.expect(responseJson.meta.pagination).to.have.property('count');",
 									"    pm.expect(responseJson.meta.pagination.links).to.be.an('array');",
 									"    pm.expect(responseJson.data).to.be.an('array');",
-									"    pm.expect(VIN).to.equal(pm.globals.get(\"VIN_id\"));",
+									"    pm.expect(VIN).to.equal(pm.environment.get(\"VIN_id\"));",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3442,7 +3444,7 @@
 					"response": []
 				},
 				{
-					"name": "/api/report/API_keys/6975253",
+					"name": "/api/report/{{API_keys}}/{{requestID}}",
 					"event": [
 						{
 							"listen": "test",
@@ -3564,57 +3566,57 @@
 	],
 	"variable": [
 		{
-			"id": "cd724a5a-55dc-451c-8250-4a8e912dde83",
+			"id": "fb1f23c7-88f1-4fe4-959b-bd21292df8c2",
 			"key": "token_id",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDE2NDI4MDcsImV4cCI6MjU0NzcyNjQwNywibmJmIjoxNjAxNjQyODA3LCJqdGkiOiIyMmt5RFFuRHlaSk1QMk1oIn0.g_DsAim8EoikXiBJ4kukNMCyel3iDUzdgHpBgEh2m6M"
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDE2NDQxMDgsImV4cCI6MjU0NzcyNzcwOCwibmJmIjoxNjAxNjQ0MTA4LCJqdGkiOiI1djlGVExZZXljNUVqbkZRIn0.XF5rdwovXhxdM6qBvk6MjfG0CEEf05_VJjlKJGGTsnU"
 		},
 		{
-			"id": "abf37ef3-22ca-4403-8974-5d3aa71088ff",
+			"id": "41b3312b-8d1d-4adb-87b7-eeb7f4d51a30",
 			"key": "user_id",
-			"value": 2971
+			"value": 2976
 		},
 		{
-			"id": "44c6f3ff-73a4-4c7c-b98c-ad7da17672e1",
+			"id": "e3ee527e-eabe-42a4-b628-167209c21f3e",
 			"key": "group_id",
-			"value": 347
+			"value": 352
 		},
 		{
-			"id": "3c9db478-99ca-48e4-af09-7932e1a2d32f",
+			"id": "33da3736-3277-41d5-b2b5-df481676a151",
 			"key": "role_id",
-			"value": 351
+			"value": 356
 		},
 		{
-			"id": "fc37b569-a0e4-480c-b7db-f1c22c1eadbc",
+			"id": "7c7e396a-a641-4178-a765-aaf35bcbbbfb",
 			"key": "uuid",
 			"value": "0d440c50-f82c-11ea-9ba9-79990f4e24d7"
 		},
 		{
-			"id": "35e4fe41-35de-4a11-94fb-c6808cbcd18a",
+			"id": "f8073d96-885a-4a86-a242-d6a588e1ef5f",
 			"key": "sand",
 			"value": "https://sandbox.driveroo.com"
 		},
 		{
-			"id": "929b99a1-8430-4a44-92fd-8da241f08ba5",
+			"id": "92691a15-c62f-43f8-9cc7-efdea5be4f1f",
 			"key": "prod",
 			"value": "https://www.driveroo.com"
 		},
 		{
-			"id": "f81c7d38-c65d-4a3f-a9e2-1ff98a932fdd",
+			"id": "7719e0d7-1bb4-4666-b31c-5921c371506d",
 			"key": "car_id",
 			"value": "14968"
 		},
 		{
-			"id": "6d5f399d-9be7-4dfd-bef9-b3cbf9f4b276",
+			"id": "b54bf2ae-2246-4550-99a9-55b4ecda13c6",
 			"key": "VIN_id",
 			"value": "NM0LS6BN4DT175842"
 		},
 		{
-			"id": "93329e8a-e7eb-4bb7-8d25-97f5367228ec",
+			"id": "a99c830e-b0fd-40fd-8c12-3cbb9ca58fb5",
 			"key": "API_keys",
 			"value": "fe825311-67ae-49e3-b437-cea6e31587bd"
 		},
 		{
-			"id": "3caa48eb-be7a-4073-b955-8ab0e0fa9890",
+			"id": "329c9903-e3bd-46ac-825c-b68af32ccebe",
 			"key": "requestID",
 			"value": "5335752"
 		}
