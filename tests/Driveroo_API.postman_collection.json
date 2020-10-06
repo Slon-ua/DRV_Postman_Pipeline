@@ -9,6 +9,258 @@
 			"name": "Driveroo_Test_Env",
 			"item": [
 				{
+					"name": "Fleet",
+					"item": [],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "/admin/login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "02027b1d-2d15-4039-b0ef-1c40f63f768e",
+										"exec": [
+											"// console.log( pm.cookies.get(\"laravel_session\"));",
+											"//let cookies = \"laravel_session=\"+ pm.cookies.get(\"laravel_session\");",
+											"",
+											"//console.log(cookies);",
+											"",
+											"pm.globals.set(\"cookies-token\", \"laravel_session=\"+ pm.cookies.get(\"laravel_session\"));",
+											"pm.collectionVariables.set(\"cookies-token\", \"laravel_session=\"+ pm.cookies.get(\"laravel_session\"));",
+											"pm.environment.set(\"cookies-token\", \"laravel_session=\"+ pm.cookies.get(\"laravel_session\"));",
+											"",
+											"//console.log(pm.globals.get(\"cookies-token\") +\" | \"+pm.collectionVariables.get(\"cookies-token\")+\" | \"+pm.environment.get(\"cookies-token\"));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_token",
+											"value": "tWT9T8O3n1VV5KN6Lq4jnRuPt5R2p6RkyuQLPtIP",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "nadezhda@driveroo.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "qwerty",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{sand}}/admin/login",
+									"host": [
+										"{{sand}}"
+									],
+									"path": [
+										"admin",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/admin/clockwork?sort=time&order=desc&id=&user=Freddie+Mercury&time=&url=&ip=&status=&method=&duration=",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b8415849-781a-41cd-b081-0046a8a28c1b",
+										"exec": [
+											"var jsonRes = htmlTableToJson(responseBody);",
+											"console.log(jsonRes);",
+											"",
+											"function htmlTableToJson(data) {",
+											"    const $ = cheerio.load(data, { normalizeWhitespace: true });",
+											"    var table = $(\"#clockwork\").html();",
+											"    var result = [];",
+											"    var headers = [];",
+											"",
+											"    $(\"thead\", table).find(\"th\").each(function(i,el) {",
+											"        headers[i] = $(el).text().trim();",
+											"    });",
+											"    console.log(headers);",
+											"",
+											"    $(\"tbody\", table).find(\"tr\").each(function(i,el) {",
+											"        var node = {};",
+											"        $(\"td\", el).each(function(j,el) {",
+											"            if(j < 10)",
+											"                node[headers[j]] = $(el).text().trim();    ",
+											"            else     ",
+											"                node[headers[j]] = $(el).find(\"a\").attr(\"href\");",
+											"        });",
+											"        result[i] = node;",
+											"    });",
+											"",
+											"    return JSON.stringify(result);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "{{cookies-token}}"
+									}
+								],
+								"url": {
+									"raw": "{{sand}}/admin/clockwork?sort=time&order=desc&id=&user=Freddie+Mercury&time=&url=&ip=&status=&method=&duration=",
+									"host": [
+										"{{sand}}"
+									],
+									"path": [
+										"admin",
+										"clockwork"
+									],
+									"query": [
+										{
+											"key": "sort",
+											"value": "time"
+										},
+										{
+											"key": "order",
+											"value": "desc"
+										},
+										{
+											"key": "id",
+											"value": ""
+										},
+										{
+											"key": "user",
+											"value": "Freddie+Mercury"
+										},
+										{
+											"key": "time",
+											"value": ""
+										},
+										{
+											"key": "url",
+											"value": ""
+										},
+										{
+											"key": "ip",
+											"value": ""
+										},
+										{
+											"key": "status",
+											"value": ""
+										},
+										{
+											"key": "method",
+											"value": ""
+										},
+										{
+											"key": "duration",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/clockwork/{{API_keys}}",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "378e12d6-9712-4ee6-8a45-4738b67ab8c7",
+										"exec": [
+											"let responseJson = pm.response.json();",
+											"",
+											"pm.globals.set(\"clockwork_id\", responseJson.data[0].id);",
+											"pm.collectionVariables.set(\"clockwork_id\", responseJson.data[0].id);",
+											"pm.environment.set(\"requclockwork_idestID\", responseJson.data[0].id);",
+											"",
+											"",
+											"console.log(pm.globals.get(\"clockwork_id\") +\"  \"+pm.collectionVariables.get(\"clockwork_id\")+\"  \"+pm.environment.get(\"requclockwork_idestID\"));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{sand}}/api/clockwork/{{API_keys}}?page=13&sort=duration&order=desc&per_page=100",
+									"host": [
+										"{{sand}}"
+									],
+									"path": [
+										"api",
+										"clockwork",
+										"{{API_keys}}"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "13"
+										},
+										{
+											"key": "sort",
+											"value": "duration"
+										},
+										{
+											"key": "order",
+											"value": "desc"
+										},
+										{
+											"key": "per_page",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/clockwork/{{API_keys}}/{clockwork_id}",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{sand}}/api/clockwork/{{API_keys}}/{{clockwork_id}}",
+									"host": [
+										"{{sand}}"
+									],
+									"path": [
+										"api",
+										"clockwork",
+										"{{API_keys}}",
+										"{{clockwork_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "/fleets/login",
 					"event": [
 						{
@@ -194,12 +446,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://sandbox.driveroo.com/userApi/fleets/groups",
-							"protocol": "https",
+							"raw": "{{sand}}/userApi/fleets/groups",
 							"host": [
-								"sandbox",
-								"driveroo",
-								"com"
+								"{{sand}}"
 							],
 							"path": [
 								"userApi",
@@ -3316,7 +3565,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{sand}}/userApi/fleets/inspections?car={{VIN_id}}&sort=&order=desc&page=1&dateFrom=2020-09-18&dateTo=2020-10-25&group=",
+							"raw": "{{sand}}/userApi/fleets/inspections?car={{VIN_id}}&sort=&order=desc&page=1&dateFrom=2019-09-18&dateTo=2021-10-25&group=",
 							"host": [
 								"{{sand}}"
 							],
@@ -3344,11 +3593,11 @@
 								},
 								{
 									"key": "dateFrom",
-									"value": "2020-09-18"
+									"value": "2019-09-18"
 								},
 								{
 									"key": "dateTo",
-									"value": "2020-10-25"
+									"value": "2021-10-25"
 								},
 								{
 									"key": "group",
@@ -3495,6 +3744,50 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "test analitics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bde576d5-2f02-4533-8f0e-c242f1251e2d",
+								"exec": [
+									"console.log(pm.collectionVariables.get(\"car_id\")+\"/userApi/fleets/cars/status/isabled\");",
+									"postman.setNextRequest(pm.collectionVariables.get(\"sand\")+\"/userApi/fleets/cars/status/isabled\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sand}}/userApi/fleets/cars/status/active",
+							"host": [
+								"{{sand}}"
+							],
+							"path": [
+								"userApi",
+								"fleets",
+								"cars",
+								"status",
+								"active"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"auth": {
@@ -3566,59 +3859,69 @@
 	],
 	"variable": [
 		{
-			"id": "5a88829b-1324-4331-a28d-287cf7c55ae2",
+			"id": "00818ae0-9755-4b81-9430-aad7730d5819",
 			"key": "token_id",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDE2NDQxMDgsImV4cCI6MjU0NzcyNzcwOCwibmJmIjoxNjAxNjQ0MTA4LCJqdGkiOiI1djlGVExZZXljNUVqbkZRIn0.XF5rdwovXhxdM6qBvk6MjfG0CEEf05_VJjlKJGGTsnU"
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDE5NzgzMzYsImV4cCI6MjU0ODA2MTkzNiwibmJmIjoxNjAxOTc4MzM2LCJqdGkiOiI5N3ZOTmRvSlhMYmhyNkt5In0.RHFeEaikRba-bVlGOSPD_TqA2zpKcY_0CBm9KXOrihU"
 		},
 		{
-			"id": "47951403-6d66-43da-8306-f282722d4f8f",
+			"id": "d9115c56-d9dd-4ae3-85bf-3d18e8a42008",
 			"key": "user_id",
-			"value": 2976
+			"value": 2998
 		},
 		{
-			"id": "1ad87d9b-1a41-4776-a654-2b384489ccbc",
+			"id": "90ddf6f7-3516-463f-982b-34ad9173f6ad",
 			"key": "group_id",
-			"value": 352
+			"value": 372
 		},
 		{
-			"id": "2380f02c-e122-4141-b4d5-f53badc48755",
+			"id": "eed7fb17-1e5c-4cdc-8b35-47b60161b838",
 			"key": "role_id",
-			"value": 356
+			"value": 379
 		},
 		{
-			"id": "8b26544d-acd6-431c-bc62-3f26660a7cf4",
+			"id": "43a4f098-886c-44fb-9d59-4289910bdb30",
 			"key": "uuid",
 			"value": "0d440c50-f82c-11ea-9ba9-79990f4e24d7"
 		},
 		{
-			"id": "0c0cf013-7374-43cd-919f-631153564cfd",
+			"id": "66eda536-85c6-4ed5-a9b1-37e53d5c93b2",
 			"key": "sand",
 			"value": "https://sandbox.driveroo.com"
 		},
 		{
-			"id": "feae91a9-07e8-4ba6-8d93-8f360db50b9e",
+			"id": "7c222c4c-ec45-45b4-9cfa-f43729af0603",
 			"key": "prod",
 			"value": "https://www.driveroo.com"
 		},
 		{
-			"id": "6e2b18d8-b657-43eb-b4c6-18fcfdb9644d",
+			"id": "46182d49-074a-401d-ada0-bf45bd319686",
 			"key": "car_id",
 			"value": "14968"
 		},
 		{
-			"id": "774daee3-e0d7-4f3e-858d-0258f43e9f10",
+			"id": "5d371afa-7a33-4cd6-84fd-1a1d0533bc27",
 			"key": "VIN_id",
 			"value": "NM0LS6BN4DT175842"
 		},
 		{
-			"id": "c9b61552-b1ce-4c12-ae7f-f289e529e35d",
+			"id": "72c51fa0-64f1-4b02-a7fc-da1a922fc41b",
 			"key": "API_keys",
-			"value": "fe825311-67ae-49e3-b437-cea6e31587bd"
+			"value": "024e5916-d002-47e8-83f9-15ba0860c583"
 		},
 		{
-			"id": "a87f4c3d-7f03-4ce3-a3bd-e951a44f2032",
+			"id": "edc79d8f-fef0-4f57-80ca-cb0632f24059",
 			"key": "requestID",
 			"value": "5335752"
+		},
+		{
+			"id": "b5f73142-b8db-4f21-be0a-465848a10975",
+			"key": "cookies-token",
+			"value": "laravel_session=BOlvZPpVYN6PweOtZQfSXRTEiZmVuYM5mk4SNI5G"
+		},
+		{
+			"id": "48116fe1-de5c-44aa-a549-967d123749dc",
+			"key": "clockwork_id",
+			"value": "3540736"
 		}
 	],
 	"protocolProfileBehavior": {}
