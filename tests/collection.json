@@ -57,7 +57,7 @@
 							"    \"readable\": false",
 							"});",
 							"console.log(\"===========\");",
-							"console.log(pm.globals.get(\"file_image2\"));"
+							"//console.log(pm.globals.get(\"file_image2\"));"
 						],
 						"type": "text/javascript"
 					}
@@ -70,6 +70,8 @@
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
+							"let responseJSON =pm.response.json();",
+							"console.log(responseJSON);",
 							"",
 							"pm.test(\"Your test name\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -180,7 +182,7 @@
 						"id": "daeb535c-f0b3-4843-978e-72e6776bb8f1",
 						"exec": [
 							"let responseJson = pm.response.json().data;",
-							"console.log(responseJson);",
+							"//console.log(responseJson);",
 							"",
 							"var merged = {};",
 							"for (var i = 0; i < responseJson.length; i++) {",
@@ -193,7 +195,7 @@
 							"             merged[responseJson[i].url].data_id.push(responseJson[i].id);",
 							"        }",
 							"        if (merged[responseJson[i].user_id]){",
-							"            console.log(\"---\"+merged[responseJson[i].url].user_id[responseJson[i].user_id]);",
+							"         //   console.log(\"---\"+merged[responseJson[i].url].user_id[responseJson[i].user_id]);",
 							"             merged[responseJson[i].url].user_id[responseJson[i].user_id] = 0;",
 							"        }",
 							"        if (merged[responseJson[i].url].user_id) {",
@@ -219,7 +221,7 @@
 							"console.log(\"===================================================================\");",
 							"",
 							"console.log(merged);",
-							"console.log(result_arr);",
+							"//console.log(result_arr);",
 							"",
 							"console.log(\"===================================================================\");",
 							"",
@@ -326,7 +328,7 @@
 	],
 	"variable": [
 		{
-			"id": "e6ab639c-d2c7-470f-9db6-38e21805eecf",
+			"id": "6dd63476-cfcb-4639-9d87-4b2923d830a1",
 			"key": "token_id",
 			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDE5OTIxODAsImV4cCI6MjU0ODA3NTc4MCwibmJmIjoxNjAxOTkyMTgwLCJqdGkiOiI2Z0NRMTh6OW9maXUzT2YwIn0.05Ad9IV2b1je7w8tGZBOfvG4fq9R6WU--3KHogLgPmY"
 		}
