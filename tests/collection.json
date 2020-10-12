@@ -67,11 +67,12 @@
 					"script": {
 						"id": "9a607a2b-db59-4fcd-8894-b313f01975b7",
 						"exec": [
+							"let responseJSON =pm.response.json();",
+							"console.log(responseJSON);",
+							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
-							"let responseJSON =pm.response.json();",
-							"console.log(responseJSON);",
 							"",
 							"pm.test(\"Your test name\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -328,7 +329,7 @@
 	],
 	"variable": [
 		{
-			"id": "6dd63476-cfcb-4639-9d87-4b2923d830a1",
+			"id": "6ba773ec-8249-4e75-a893-093ee8cb7426",
 			"key": "token_id",
 			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzcyI6InVzZXIiLCJzdWIiOjI4NTMsImlzcyI6Imh0dHBzOi8vc2FuZGJveC5kcml2ZXJvby5jb20vdXNlckFwaS9mbGVldHMvbG9naW4iLCJpYXQiOjE2MDE5OTIxODAsImV4cCI6MjU0ODA3NTc4MCwibmJmIjoxNjAxOTkyMTgwLCJqdGkiOiI2Z0NRMTh6OW9maXUzT2YwIn0.05Ad9IV2b1je7w8tGZBOfvG4fq9R6WU--3KHogLgPmY"
 		}
