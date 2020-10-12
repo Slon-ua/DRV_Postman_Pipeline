@@ -140,9 +140,9 @@
 						},
 						{
 							"key": "file",
-							"description": "file1.jpg",
+							"description": "./tests/file1.jpg",
 							"type": "file",
-							"src": "file1.jpg"
+							"src": "./tests/file1.jpg"
 						},
 						{
 							"key": "file",
