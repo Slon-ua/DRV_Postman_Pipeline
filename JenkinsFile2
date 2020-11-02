@@ -13,6 +13,7 @@ node {
 		sh 'ls -la '
 		sh 'ls -la ../'
 		sh 'ls -la ../Postman_Driveroo'
+		sh 'ls -la ../../jobs/'
 		sh 'ls -la ../../jobs/Driveroo_Postman_Pipeline(JenkinsFile)/builds/'
 
 		try {
