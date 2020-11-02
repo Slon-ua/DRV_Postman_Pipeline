@@ -18,7 +18,7 @@ node {
 		sh 'ls -la ../../jobs/Driveroo_Postman_Pipeline_JenkinsFile/'
 		sh 'ls -la ../../jobs/Driveroo_Postman_Pipeline_JenkinsFile/builds/'
 		sh 'ls -la ../../jobs/Driveroo_Postman_Pipeline_JenkinsFile/builds/69/'
-		sh 'ls -la ../../jobs/Driveroo_Postman_Pipeline_JenkinsFile/builds/69/consoleText'
+		sh 'ls -la ../../jobs/Driveroo_Postman_Pipeline_JenkinsFile/builds/69/'
 
 		try {
 			sh 'npm run api-tests-production'
