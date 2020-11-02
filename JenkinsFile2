@@ -9,6 +9,9 @@ node {
 
 		git 'https://github.com/Slon-ua/Driveroo_Postman_Pipeline.git'
 		sh 'npm install'
+		sh 'pwd'
+		sh 'ls -la'
+
 		try {
 			sh 'npm run api-tests-production'
 			currentBuild.result = 'SUCCESS'
