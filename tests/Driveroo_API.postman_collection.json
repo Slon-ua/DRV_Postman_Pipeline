@@ -3542,7 +3542,7 @@
 									"pm.test(\"The response has all properties\", () => {",
 									"    pm.expect(responseJson.meta.pagination).to.have.any.keys('total');",
 									"    pm.expect(responseJson.meta.pagination).to.have.property('count');",
-									"    pm.expect(responseJson.meta.pagination.links).to.be.an('array');",
+									"    pm.expect(responseJson.meta.pagination.links).to.be.an('object');",
 									"    pm.expect(responseJson.data).to.be.an('array');",
 									"    pm.expect(VIN).to.equal(pm.environment.get(\"VIN_id\"));",
 									"});"
