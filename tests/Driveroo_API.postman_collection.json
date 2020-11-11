@@ -2835,7 +2835,7 @@
 									"    pm.expect(responseJson.meta.pagination.links).to.be.an('object');",
 									"    pm.expect(responseJson.success).to.equal(true);",
 									"    pm.expect(responseJson.data[0].object_id).to.be.a('string');",
-									"    pm.expect(responseJson.data[0].object_name).to.equal('2013 Ford Transit Connect (Vehicle 3)');",
+									"    pm.expect(responseJson.data[0].object_name).to.be.a('string');",
 									"});"
 								],
 								"type": "text/javascript"
